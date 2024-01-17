@@ -20,8 +20,8 @@
         
         {{-- owl --}}
     </head>
-    <body class="bg-black text-white ">
-        <header>
+    <body class="h-[200vh] text-white">
+        <header class="mb-12">
             <div class="flex w-full justify-center my-1">
                 <div class="flex border-b-2 px-2 border-b-[#645394]">
                     <img src="{{asset("images/LOGO VISION.png")}}" alt="logo" class="w-[50px] md:w-[70px] lg:w-[80px]">
@@ -34,11 +34,48 @@
                 <p class="w-3/5 text-center font-medium">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus magni quidem quo nobis. Voluptate repellendus necessitatibus esse incidunt fugit optio? Error, consequuntur quo.</p>
             </div>
         </header>
-        <main class="mt-5 ">
+        <nav class="flex justify-between w-full bg-[#fff] text-[#000] border-b-2 border-b-[#645394] z-10 p-3" id="navbar">
+            <div class="flex w-10/12 mx-auto justify-between">
+                <div class="flex w-1/3">
+                    <a href="/" class="text-xl font-medium bg-black">
+                        <img src="{{asset("images/LOGO VISION.png")}}" alt="logo" class="w-[40px]">
+                   </a>
+                </div>
+                <div class="flex w-1/3 justify-around">
+                    <a href="/products" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> Hoddies </a>
+                    <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> Flags </a>
+                    <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> Flashlights </a>
+                    <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> More </a>
+                </div>
+                <div class="flex w-1/3 justify-end space-x-4">
+                    <a href="#" class="text-2xl font-medium "> <i class="fa-solid fa-cart-shopping"></i> </a>
+                </div>
+            </div>
+        </nav>
+        <main class="mt-5 " id="scroll-section">
             @yield('content')
         </main>
     </body>
-    <script type="module">
-
+    
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function fixNavbar() {
+                var navbar = $("#navbar");
+                var scrollSection = $("#scroll-section");
+                var offset = scrollSection.offset().top;
+    
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() >= offset) {
+                        navbar.addClass("fixed animate__animated animate__slideInDown top-0 shadow-xl text-black border-b-3 border-b-[##645394]");
+                    } else {
+                        navbar.removeClass("fixed animate__animated animate__slideInDown  top-0 shadow-xl text-black border-b-3 border-b-[#645394]");
+                    }
+                });
+            }
+    
+            fixNavbar();
+        });
     </script>
 </html>
