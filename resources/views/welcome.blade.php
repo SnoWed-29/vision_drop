@@ -79,6 +79,15 @@
         </div>
         <div class="flex w-1/3 justify-end space-x-4">
             <a href="#" class="text-2xl font-medium "> <i class="fa-solid fa-cart-shopping"></i> </a>
+            @if(auth()->check())
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-2xl font-medium">
+                    {{auth()->user()->name}}
+                </a>
+            
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endif
         </div>
     </div>
 </nav>
