@@ -265,7 +265,7 @@
 
             $(window).scroll(function () {
                 if ($(window).scrollTop() >= offset) {
-                    navbar.addClass("fixed animate__animated animate__slideInDown shadow-xl text-black border-b-3 border-b-[##645394]");
+                    navbar.addClass("fixed animate__animated animate__slideInDown shadow-xl text-black border-b-3 border-b-[#645394]");
                 } else {
                     navbar.removeClass("fixed animate__animated animate__slideInDown  shadow-xl text-black border-b-3 border-b-[#645394]");
                 }
