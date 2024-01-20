@@ -19,11 +19,13 @@ use App\Http\Controllers\PagesController;
 Route::get('/products', [PagesController::class, 'products']);
 Route::get('/', [PagesController::class, 'index'])->name('indexPage');
 
-Route::get('/test',[PagesController::class , 'test'] );
 Route::group(['middleware' => 'admin'], function () {
     // Admin-only routes go here
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
+
+//testing routes
+Route::get('/test',[PagesController::class , 'test'] );
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
