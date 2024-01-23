@@ -22,6 +22,7 @@ Route::get('/', [PagesController::class, 'index'])->name('indexPage');
 Route::group(['middleware' => 'admin'], function () {
     // Admin-only routes go here
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard/add-product' , [AdminController::class, 'addProduct'])->name('admin.addProduct');
 });
 
 //testing routes

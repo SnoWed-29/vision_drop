@@ -16,3 +16,44 @@ body{
     border-right: 2px solid white;
     background: linear-gradient(0deg, rgba(0,0,0,0.9585084033613446) 0%, rgba(92,76,136,1) 90%, rgba(100,83,148,1) 100%);
 }
+.dataTables_wrapper .dataTables_paginate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.dataTables_paginate .paginate_button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #555;
+}
+
+.dataTables_paginate .paginate_button.current {
+    background-color: #645394;
+    color: #fff;
+}
+.top{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#OrdersTable_filter input[type="search"]{
+    border: 2px solid black;
+    border-radius: 3px;
+}
+#OrdersTable_length select{
+    border: 2px solid gray;
+    padding: 2px;
+    border-radius: 3px;
+}
+#OrdersTable_filter  label, #OrdersTable_length label {
+    font-size: medium;
+    font-weight: 600;
+}
+
+
