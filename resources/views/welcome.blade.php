@@ -78,8 +78,11 @@
             <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> More </a>
         </div>
         <div class="flex w-1/3 justify-end space-x-4">
-            <a href="#" class="text-2xl font-medium "> <i class="fa-solid fa-cart-shopping"></i> </a>
             @if(auth()->check())
+            @if(auth()->user()->idAdmin = 1)
+            <a href="/admin/dashboard" class="text-2xl text-black font-medium hover:border-b-2 border-b-[#645394]"> Dashboard </a>
+
+        @endif
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-2xl font-medium">
                     {{auth()->user()->name}}
                 </a>
@@ -87,7 +90,13 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
+               
+            @else
+                <a href="/login" class="text-2xl font-medium "> Login </a>
             @endif
+            <a href="#" class="text-2xl font-medium "> <i class="fa-solid fa-cart-shopping"></i> </a>
+
+           
         </div>
     </div>
 </nav>

@@ -18,11 +18,11 @@ class PagesController extends Controller
    }
    public function test(){
 
-      // $category = Category::create([
-      //    'name'=>'category01test',
-      //    'total_products'=>12,
-      // ]);
-
+      $category = Category::create([
+         'name'=>'category03test',
+         'total_products'=>0,
+      ]);
+return $category;
       // $product = Product::create([
       //    'name'=>'Products01Test',
       //    'slug'=>'Products-01-Test',
@@ -39,22 +39,7 @@ class PagesController extends Controller
       // }else{
       //    return dd($product, 'product not created');
       // }
-      $user = User::find(1); // Assuming user with ID 1 exists
-
-if ($user) {
-    $user->update([
-        'isAdmin' => 1,
-    ]);
-
-    // Optional: Reload the user instance to get the updated values from the database
-    $user->refresh();
-
-    // Check the updated value
-    dd($user->isAdmin);
-} else {
-    // User not found
-    // You can add any additional error handling logic here
-}
+ 
 
       
    }

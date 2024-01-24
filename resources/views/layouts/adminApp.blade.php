@@ -18,20 +18,23 @@
     <body class="h-[200vh] text-white" id="adminBody">
         <div class="flex justify-between space-x-3">
             <div class="w-1/6">
-                <div class="fixed left-0 w-1/6  flex-col  h-screen space-y-3 linearBackground rounded-r-3xl"id="sideNav">
+                <div class="fixed left-0 w-1/6  flex-col  h-screen space-y-3 linearBackground rounded-r-3xl" id="sideNav">
                     <div class="flex flex-col w-full justify-center space-y-3 items-center mt-4 h-1/4">
                         <img src="{{asset('images/LOGO VISION.png')}}" alt="logo" class="w-24 h-24">
                         <h1 class="text-xl border-b border-b-white pb-2">Vision Drop</h1>
                     </div>
                     <div class="flex flex-col space-y-3 justify-center h-1/3">
-                        <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3 text-white border-b-2 border-white"><i class="fa-solid fa-house"></i> Home</a>
-                        <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3 text-white border-b-2 border-white"><i class="fa-solid fa-bag-shopping"></i> Orders</a>
-                        <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3 text-white border-b-2 border-white"><i class="fa-solid fa-box-open"></i> Manage Products</a>
-                        <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3 text-white border-b-2 border-white"><i class="fa-solid fa-list"></i> Manage Categories</a>
+                        <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3  border-b-2 border-white"><i class="fa-solid fa-house"></i> Home</a>
+                        <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3  border-b-2 border-white"><i class="fa-solid fa-bag-shopping"></i> Orders</a>
+                        <a href="/admin/dashboard/manage-products" class="text-default font-medium hover:bg-white hover:text-black p-3  border-b-2 border-white"><i class="fa-solid fa-box-open"></i> Manage Products</a>
+                        <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3 border-b-2 border-white"><i class="fa-solid fa-list"></i> Manage Categories</a>
                     </div>
                     <div class="flex w-full flex-col mt-4 h-2/6 justify-end">
                         <a href="/" class="text-default font-medium p-3"><i class="fa-solid fa-store"></i> Store Page</a>
-                        <a href="#" class="text-default font-medium p-3"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-default font-medium p-3"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>
