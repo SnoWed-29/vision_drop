@@ -16,13 +16,38 @@ class PagesController extends Controller
    public function products(){
     return view('products.index');
    }
+
+   public function showProduct($slug){
+
+      $product = Product::where('slug', $slug)->first();
+      if(!$product){
+         abort(404);
+      }
+
+      $productId  = $product->id;
+      $categoryId = $product->category_id ;
+      $relatedProducts = Product::where('category_id', $categoryId)
+      ->where('id', '!=', $productId) 
+      ->take(4) 
+      ->get();
+      
+      return view('products.show-product')->with([
+         'product'=>$product,
+         'relatedProducts'=>$relatedProducts
+      ]);
+   }
+
+
+
+
+
    public function test(){
 
       $category = Category::create([
          'name'=>'category03test',
          'total_products'=>0,
       ]);
-return $category;
+      return $category;
       // $product = Product::create([
       //    'name'=>'Products01Test',
       //    'slug'=>'Products-01-Test',

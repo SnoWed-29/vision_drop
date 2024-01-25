@@ -9,18 +9,27 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function dashboard(){
-        return view('admin.dashboard');
+        $products = Product::all();
+        $totalProducts = count($products);
+        
+        return view('admin.dashboard')->with([
+            'totalProuducts'=> $totalProducts
+        ]);
     }
     public function manageProducts(){
         $categories = Category::all();
         $products = Product::all();
-        return view('admin.products.add-product')->with([
+        return view('admin.products.manage-product')->with([
             'categories'=> $categories,
             'products'=> $products
         ]);
     }
     public function manageCategory(){
-        return dd('this is from Admin Controller@manageCategory');
+        $categories = Category::all();
+        
+        return view('admin.categories.manage-categories')->with([
+            'categories'=> $categories,
+        ]);
     }
 }
 

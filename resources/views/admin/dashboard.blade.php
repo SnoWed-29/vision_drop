@@ -24,7 +24,7 @@
             </div>
             <div class="bg-white h-24">
                 <h3 class="text-gray-500 text-xl font-bold">Total Products</h3>
-                <h1 class="text-[#645394] text-4xl font-medium mx-2">124 Product</h1>
+                <h1 class="text-[#645394] text-4xl font-medium mx-2">{{$totalProuducts}} Product</h1>
                 <div class="h-[2px] bg-[#645394] w-2/3 my-3"></div>
             </div>
             <div class="bg-white h-24">

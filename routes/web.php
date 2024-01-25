@@ -17,9 +17,15 @@ use App\Http\Controllers\productsController;
 |
 */
 
-Route::get('/products', [PagesController::class, 'products']);
 Route::get('/', [PagesController::class, 'index'])->name('indexPage');
 
+// products related routes 
+Route::get('/products', [PagesController::class, 'products']);
+Route::get('/product/{slug}' , [PagesController::class, 'showProduct']);
+
+
+
+// admine related routes
 Route::group(['middleware' => 'admin'], function () {
     // Admin-only routes go here
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
