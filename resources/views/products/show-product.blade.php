@@ -6,15 +6,16 @@
             <div class="flex justify-around">
                 {{-- Left div (product Image) --}}
                 <div class="flex w-2/5 flex-col">
-                    <div class="flex w-full">
-                        <img src="{{asset($product->images[1])}}" alt="" width="" class="">
+                    <div id="mainImage" class="flex w-full">
+                        <img src="{{ asset(Storage::url($images[0])) }}" alt="" width="1600" height="1600" class="w-full h-full object-cover">
                     </div>
-
+                
                     <div class="grid grid-cols-4 gap-4 my-2">
-                        <div class="flex h-24 border border-red-400"></div>
-                        <div class="flex h-24 border border-red-400"></div>
-                        <div class="flex h-24 border border-red-400"></div>
-                        <div class="flex h-24 border border-red-400"></div>
+                        @foreach ($images as $image)
+                        <div  class="flex h-24 border border-red-400 relative image-selector hover:cursor-pointer hover:scale-125 transition duration-300 ease-in-out">
+                            <img src="{{ asset(Storage::url($image)) }}" alt="Image" class="w-full h-full object-cover"> 
+                        </div>
+                        @endforeach
                     </div>
                 </div>
                 {{-- Right div (product Info) --}}
@@ -121,4 +122,14 @@
             </div> 
         </div>
     </section>
+    
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+        $('.image-selector').click(function() {
+            var imageUrl = $(this).find('img').attr('src');
+            $('#mainImage img').attr('src', imageUrl);
+        });
+    });
+    </script>
 @endsection

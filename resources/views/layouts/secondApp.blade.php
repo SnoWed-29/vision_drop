@@ -48,7 +48,30 @@
                     <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> More </a>
                 </div>
                 <div class="flex w-1/3 justify-end space-x-4">
+                    @if(auth()->check())
+                   
+                        <div class="relative group">
+                            <a href="" class="text-2xl font-medium" id="moreDropdownBtn"> {{auth()->user()->name}} </a>
+                            <ul class="absolute hidden bg-white text-[#000] text-lg border-[#645394] border-t-2  p-5 " id="moreDropdownContent">
+                                @if(auth()->user()->idAdmin = true)
+                                <li><a href="/admin/dashboard" class=""> Dashboard </a></li>
+                    
+                            @endif
+                                <li><a href="{{ route('logout') }}" class="my-3"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                               
+                                <!-- Add more dropdown items as needed -->
+                            </ul>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                       
+                    @else
+                        <a href="/login" class="text-2xl font-medium "> Login </a>
+                    @endif
                     <a href="#" class="text-2xl font-medium "> <i class="fa-solid fa-cart-shopping"></i> </a>
+        
+                   
                 </div>
             </div>
         </nav>
@@ -76,6 +99,25 @@
             }
     
             fixNavbar();
+
+            var moreDropdownBtn = $('#moreDropdownBtn');
+        var moreDropdownContent = $('#moreDropdownContent');
+
+        // Add a click event listener to the More link
+        moreDropdownBtn.click(function (event) {
+            // Prevent the default behavior of the link
+            event.preventDefault();
+
+            // Toggle the visibility of the dropdown content
+            moreDropdownContent.toggleClass('hidden');
+        });
+
+        // Close the dropdown if the user clicks outside of it
+        $(document).click(function (event) {
+            if (!moreDropdownBtn.is(event.target) && !moreDropdownContent.is(event.target) && moreDropdownContent.has(event.target).length === 0) {
+                moreDropdownContent.addClass('hidden');
+            }
+        });
         });
     </script>
 </html>

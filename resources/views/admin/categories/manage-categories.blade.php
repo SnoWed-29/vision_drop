@@ -11,7 +11,7 @@
     <div class="flex w-full flex-col">
         <h2 class="text-xl font-medium py-2 w-fit border-b border-b-[#645394]">Add Product</h2>
         <div class="flex flex-col">
-            <form action="{{ route('addProduct')}}" method="POST" class="grid grid-cols-2 gap-4 mx-auto w-4/5 my-2" enctype="multipart/form-data">
+            <form action="{{ route('addCategory')}}" method="POST" class="grid grid-cols-2 gap-4 mx-auto w-4/5 my-2" enctype="multipart/form-data">
                 @method('POST')
                 @csrf
                 <div class="bg-white">

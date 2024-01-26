@@ -66,12 +66,17 @@
                         <p class="error-message text-red-400">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="flex  space-y-3">
-                    <input type="file" name="images[]" multiple accept="image/*">
+                <div class="flex flex-col space-y-3">
+                    <input type="file" name="images[]" multiple accept="image/*" id="imageInput">
                     @error('images[]')
-                    <p class="error-message text-red-400">{{ $message }}</p>
-                @enderror
+                        <p class="error-message text-red-400">{{ $message }}</p>
+                    @enderror
+                    <div class="grid grid-cols-4 gap-4 my-2" id="imagePreviewContainer">
+                        <!-- Selected images will be displayed here dynamically -->
+                    </div>
                 </div>
+                
+                
 
                 <div class="flex mt-6 w-full justify-end">
                     <button type="submit" class="bg-[#645394] w-fit h-fit px-4 py-2 font-medium text-white">Add</button>
@@ -106,7 +111,7 @@
                     <td>{{$product->discount}}</td>
                     <td>{{$product->stock_quantity}}</td>
                     <td>{{$product->category()->first()->name}}</td>
-                    <td>{{strip_tags($product->description)}}</td>
+                    <td>{{ Illuminate\Support\Str::limit(strip_tags($product->description), 25) }}</td>
                     <td>{{$product->created_at}}</td>
                     <td class="flex space-x-4">
                         <a href="" class="bg-[#645394] px-4 py-2 text-white font-medium">Edit</a>
@@ -145,6 +150,33 @@
         .catch(error => {
             console.error(error);
         });
+        $(document).ready(function () {
+        // Listen for changes in the file input
+        $('#imageInput').change(function () {
+            // Get the selected files
+            var files = this.files;
 
+            // Clear the previous images in the preview container
+            $('#imagePreviewContainer').empty();
+
+            // Loop through the selected files and create image previews
+            for (var i = 0; i < files.length; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    // Create an image element with the preview
+                    var image = $('<div class="flex h-24 border border-red-400 relative image-selector hover:cursor-pointer hover:scale-125 transition duration-300 ease-in-out">' +
+                        '<img src="' + e.target.result + '" alt="Image" class="w-full h-full object-cover">' +
+                        '</div>');
+
+                    // Append the image to the preview container
+                    $('#imagePreviewContainer').append(image);
+                };
+
+                // Read the file as a data URL
+                reader.readAsDataURL(files[i]);
+            }
+        });
+    });
 </script>
 @endsection

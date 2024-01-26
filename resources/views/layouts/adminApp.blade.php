@@ -27,7 +27,7 @@
                         <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3  border-b-2 border-white"><i class="fa-solid fa-house"></i> Home</a>
                         <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3  border-b-2 border-white"><i class="fa-solid fa-bag-shopping"></i> Orders</a>
                         <a href="/admin/dashboard/manage-products" class="text-default font-medium hover:bg-white hover:text-black p-3  border-b-2 border-white"><i class="fa-solid fa-box-open"></i> Manage Products</a>
-                        <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3 border-b-2 border-white"><i class="fa-solid fa-list"></i> Manage Categories</a>
+                        <a href="/admin/dashboard/manage-Categories" class="text-default font-medium hover:bg-white hover:text-black p-3 border-b-2 border-white"><i class="fa-solid fa-list"></i> Manage Categories</a>
                     </div>
                     <div class="flex w-full flex-col mt-4 h-2/6 justify-end">
                         <a href="/" class="text-default font-medium p-3"><i class="fa-solid fa-store"></i> Store Page</a>

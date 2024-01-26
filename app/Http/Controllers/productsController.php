@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class productsController extends Controller
     public function addProduct(Request $request) {
         $request->validate([
             'name' => ['required', 'min:3', 'max:30'],
-            'description' => ['required', 'min:10', 'max:255'],
+            'description' => ['required', 'min:10', 'max:1050'],
             'price' => ['required', 'numeric'], // assuming price is a numeric value
             'discount' => ['numeric'], // assuming discount is a numeric value
             'images.*' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
@@ -19,14 +20,14 @@ class productsController extends Controller
             'category_id' => ['required']
         ]);
 
-        $slug = Str::slug($request->input('name'), '-');
+        $slug = Str::slug($request->input('name'), '-', );
         // handle Images
         $imagesPaths = [];
 
         foreach ($request->file('images') as $image) {
-            $uniqueName = hash('sha256', time() . uniqid()). $slug . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('ProductImages', $uniqueName);
-            $imagesPaths[] = $path;
+            $uniqueName = hash('sha256', time() . uniqid()) . '.' . $image->getClientOriginalExtension();
+            $path = $image->storeAs('public/ProductImages', $uniqueName);
+            $imagesPaths[] = 'ProductImages/' . $uniqueName;
         }
 
 
@@ -50,5 +51,14 @@ class productsController extends Controller
         }
         
         
+    }
+    public function addCategory(Request $request){
+        $request->validate([
+            'name' => ['required', 'min:3', 'max:30'],
+        ]);
+        Category::create([
+            'name'=> $request->input('name')
+        ]);
+        return redirect()->route('admin.manageCategory');
     }
 }

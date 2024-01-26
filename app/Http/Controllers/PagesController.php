@@ -30,10 +30,11 @@ class PagesController extends Controller
       ->where('id', '!=', $productId) 
       ->take(4) 
       ->get();
-      
+      $productImages =  json_decode($product->images, true);
       return view('products.show-product')->with([
          'product'=>$product,
-         'relatedProducts'=>$relatedProducts
+         'relatedProducts'=>$relatedProducts,
+         'images' =>$productImages
       ]);
    }
 
