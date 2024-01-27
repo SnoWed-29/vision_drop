@@ -12,7 +12,7 @@
                 
                     <div class="grid grid-cols-4 gap-4 my-2">
                         @foreach ($images as $image)
-                        <div  class="flex h-24 border border-red-400 relative image-selector hover:cursor-pointer hover:scale-125 transition duration-300 ease-in-out">
+                        <div  class="flex h-24 relative image-selector hover:cursor-pointer hover:scale-125 transition duration-300 ease-in-out">
                             <img src="{{ asset(Storage::url($image)) }}" alt="Image" class="w-full h-full object-cover"> 
                         </div>
                         @endforeach

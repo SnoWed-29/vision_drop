@@ -24,7 +24,7 @@
                         <h1 class="text-xl border-b border-b-white pb-2">Vision Drop</h1>
                     </div>
                     <div class="flex flex-col space-y-3 justify-center h-1/3">
-                        <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3  border-b-2 border-white"><i class="fa-solid fa-house"></i> Home</a>
+                        <a href="/admin/dashboard/" class="text-default font-medium hover:bg-white hover:text-black p-3  border-b-2 border-white"><i class="fa-solid fa-house"></i> Home</a>
                         <a href="" class="text-default font-medium hover:bg-white hover:text-black p-3  border-b-2 border-white"><i class="fa-solid fa-bag-shopping"></i> Orders</a>
                         <a href="/admin/dashboard/manage-products" class="text-default font-medium hover:bg-white hover:text-black p-3  border-b-2 border-white"><i class="fa-solid fa-box-open"></i> Manage Products</a>
                         <a href="/admin/dashboard/manage-Categories" class="text-default font-medium hover:bg-white hover:text-black p-3 border-b-2 border-white"><i class="fa-solid fa-list"></i> Manage Categories</a>

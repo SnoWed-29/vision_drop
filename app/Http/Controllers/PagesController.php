@@ -38,8 +38,26 @@ class PagesController extends Controller
       ]);
    }
 
+   public function updateProduct($id){
+      $product = Product::find($id);
+      $categories = Category::all();
+      if(!$product){
+         abort(404);
+      }
 
 
+      return view('admin.products.update-product')->with([
+         'categories'=>$categories,
+         'product'=>$product
+      ]);
+   }
+
+   public function updateCategoryView($id){
+      $category = Category::find($id);
+      return view('admin.categories.update-category')->with([
+         'category'=>$category
+      ]);
+   }
 
 
    public function test(){

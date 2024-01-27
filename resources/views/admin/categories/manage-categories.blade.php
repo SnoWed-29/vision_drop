@@ -17,7 +17,7 @@
                 <div class="bg-white">
                     <div class="flex flex-col  mb-4">
                         <label for="name" class="font-medium mb-2">Name</label>
-                        <input type="text" name="name" class="border w-full p-[2px]" placeholder="Your name here">
+                        <input type="text" name="name" class="border w-full p-[2px]" placeholder="Category name">
                         @error('name')
                             <p class="error-message text-red-400">{{ $message }}</p>
                         @enderror
@@ -49,12 +49,17 @@
                     <td>{{$cat->name}}</td>
                     <td>{{$cat->created_at}}</td>
                     <td class="flex space-x-4">
-                        <a href="" class="bg-[#645394] px-4 py-2 text-white font-medium">Edit</a>
-                        <form action="">
-                            <input type="hidden" value="{{$cat->id}}" name="id">
+                        @if ($cat->name != 'Uncategorized')
+                        <a href="/category/edit/{{$cat->id}}" class="bg-[#645394] px-4 py-2 text-white font-medium">Edit</a>
+                        <form id="delete" action="{{route('destroyCategory',['id'=>$cat->id])}}" method="POST">
                             @csrf
+                            @method('DELETE')
                             <button type="submit" class="bg-red-400 px-4 py-2 font-medium text-white">Delete</button>
                         </form>
+                        @else
+                        <span>you can't perform <br>any action on this category</span>
+                        @endif
+                        {{-- <a href="/product/{{$product->slug}}" class="bg-green-500 px-4 py-2 text-white font-medium">view</a> --}}
                     </td>
                 </tr>
                 @endforeach
@@ -81,6 +86,18 @@
         .catch(error => {
             console.error(error);
         });
+        $(document).ready(function () {
+        $('#delete').submit(function(e) {
+            e.preventDefault(); // Prevent the form from submitting immediately
 
+            // Show a confirmation dialog
+            var confirmation = confirm("Are you sure you want to delete this product?");
+
+            // If the user clicks "OK", submit the form
+            if (confirmation) {
+                $(this).off('submit').submit(); // Unbind the submit event and submit the form
+            }
+        });
+    });
 </script>
 @endsection

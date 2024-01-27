@@ -4,27 +4,27 @@
 <section class="w-full p-2 text-black">
     <div class="flex w-10/12 mx-auto">
         <div class="flex justify-center w-full mb-4 p-3 border-b-2 border-b-[#645394]">
-            <h2 class="text-3xl text-black">Manage Products </h2>
+            <h2 class="text-3xl ">Modifier Product Id <span class="text-red-400">{{$product->id}}</span>
+            </h2>
         </div>
     </div>
     {{-- Add product Form --}}
     <div class="flex w-full flex-col">
-        <h2 class="text-xl font-medium py-2 w-fit border-b border-b-[#645394]">Add Product</h2>
         <div class="flex flex-col">
-            <form action="{{ route('addProduct')}}" method="POST" class="grid grid-cols-2 gap-4 mx-auto w-4/5 my-2" enctype="multipart/form-data">
-                @method('POST')
+            <form action="{{ route('updateProduct',['id' => $product->id])}}" method="POST" class="grid grid-cols-2 gap-4 mx-auto w-4/5 my-2" enctype="multipart/form-data">
+                @method('PUT')
                 @csrf
                 <div class="bg-white">
                     <div class="flex flex-col  mb-4">
                         <label for="name" class="font-medium mb-2">Name</label>
-                        <input type="text" name="name" class="border w-full p-[2px]" placeholder="Your name here">
+                        <input type="text" name="name" class="border w-full p-[2px]" value="{{$product->name}}" placeholder="Your name here">
                         @error('name')
                             <p class="error-message text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="flex flex-col  mb-4">
                         <label for="price" class="font-medium mb-2">Price</label>
-                        <input type="text" name="price" class="border mb-4 w-full p-[2px]" placeholder="500, 600 .... ">
+                        <input type="text" name="price" class="border mb-4 w-full p-[2px]" value="{{$product->price}}" placeholder="500, 600 .... ">
                         @error('price')
                             <p class="error-message text-red-400">{{ $message }}</p>
                         @enderror
@@ -32,7 +32,7 @@
 
                     <div class="flex flex-col  mb-4">
                         <label for="name" class="font-medium mb-2">Discount</label>
-                        <input type="text" name="discount" class="border mb-4 w-full p-[2px]" placeholder="Discount in % exp: 30, 40, 50">
+                        <input type="text" name="discount" value="{{$product->discount}}" class="border mb-4 w-full p-[2px]" placeholder="Discount in % exp: 30, 40, 50">
                         @error('discount')
                             <p class="error-message text-red-400">{{ $message }}</p>
                         @enderror
@@ -40,7 +40,7 @@
                     
                     <div class="flex flex-col mb-4">
                         <label for="name" class="font-medium mb-2">Stock Quantity</label>
-                        <input type="text" name="stockQuantity" class="border mb-4 w-full p-[2px]" placeholder="12 , 13...">
+                        <input type="text" name="stockQuantity" value="{{$product->stock_quantity}}" class="border mb-4 w-full p-[2px]" placeholder="12 , 13...">
                         @error('stockQuantity')
                             <p class="error-message text-red-400">{{ $message }}</p>
                         @enderror
@@ -48,7 +48,7 @@
 
                     <div class="flex flex-col  mb-4">
                         <label for="name" class="font-medium mb-2">Category</label>
-                        <select name="category_id" class="w-full border">
+                        <select name="category_id" class="w-full border" >
                             @foreach ($categories as $category )
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
@@ -61,7 +61,9 @@
                 </div>
                 <div class="bg-white">
                     <label for="name" class="font-medium mb-2">Description</label>
-                    <textarea name="description" id="editor" class="w-full h-full"></textarea>
+                    <textarea name="description" id="editor" class="w-full h-full" >
+                        {{strip_tags($product->description)}}
+                    </textarea>
                     @error('description')
                         <p class="error-message text-red-400">{{ $message }}</p>
                     @enderror
@@ -71,6 +73,8 @@
                     @error('images[]')
                         <p class="error-message text-red-400">{{ $message }}</p>
                     @enderror
+                    <span class="text-blue-500">*select images will remplace the older ones !</span>
+
                     <div class="grid grid-cols-4 gap-4 my-2" id="imagePreviewContainer">
                         <!-- Selected images will be displayed here dynamically -->
                     </div>
@@ -84,75 +88,7 @@
             </form>
         </div>
     </div>
-   <div class="flex w-full flex-col">
-        <div class="flex w-fit justify-center mb-4 p-3 border-b-2 border-b-[#645394]">
-            <h2 class="text-2xl text-black">Manage Products </h2>
-        </div>  
-        
-    <div class="relative overflow-x-auto w-full mx-auto shadow-md sm:rounded-lg">
-        <table id="OrdersTable" class="table table-striped p-1" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Discount</th>
-                    <th>Stock Quantity</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Created at </th>
-                    <th>Action</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($products as $product )
-                <tr>
-                    <td>{{$product->name}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->discount}}</td>
-                    <td>{{$product->stock_quantity}}</td>
-                    <td>{{$product->category()->first()->name}}</td>
-                    <td>{{ Illuminate\Support\Str::limit(strip_tags($product->description), 25) }}</td>
-                    <td>{{$product->created_at}}</td>
-                    <td class="flex space-x-2">
-                        <a href="/product/edit/{{$product->id}}" class="bg-[#645394] px-4 py-2 text-white font-medium">Edit</a>
-                        <form id="delete" action="{{route('destroyProduct',['id'=>$product->id])}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bg-red-400 px-4 py-2 font-medium text-white">Delete</button>
-                        </form>
-                        <a href="/product/{{$product->slug}}" class="bg-green-500 px-4 py-2 text-white font-medium">view</a>
-                    
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Discount</th>
-                    <th>Stock Quantity</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Created at</th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-   </div>
 </section>
-<div id="deleteModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
-    <div class="absolute inset-0 bg-black opacity-50"></div>
-    <div class="bg-white p-8 rounded shadow-md z-10">
-        <p class="text-lg font-semibold mb-4">Are you sure you want to delete this product?</p>
-        <div class="flex justify-end">
-            <button id="cancelBtn" class="px-4 py-2 text-gray-500 mr-2">Cancel</button>
-            <button id="confirmBtn" class="px-4 py-2 bg-red-400 text-white">Delete</button>
-        </div>
-    </div>
-</div>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
@@ -190,17 +126,6 @@
 
                 // Read the file as a data URL
                 reader.readAsDataURL(files[i]);
-            }
-        });
-        $('#delete').submit(function(e) {
-            e.preventDefault(); // Prevent the form from submitting immediately
-
-            // Show a confirmation dialog
-            var confirmation = confirm("Are you sure you want to delete this product?");
-
-            // If the user clicks "OK", submit the form
-            if (confirmation) {
-                $(this).off('submit').submit(); // Unbind the submit event and submit the form
             }
         });
     });
