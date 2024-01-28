@@ -24,28 +24,38 @@
                     <div class="flex w-full h-fit justify-center border-b-2 mb-6 py-3 border-b-white">
                         <h1 class="text-3xl w-fit">{{ $product->name }}</h1>
                     </div>
-                    <div class="flex flex-col space-y-3">
-                        <div class="flex">
-                            <h2 class="text-xl font-medium">Price : <span class="px-4 ">{{ $product->price }} Dh</span></h2>
+                    <div class="flex flex-col space-y-6">
+                       <div class="flex flex-col space-y-6 py-4 border-b">
+                            <div class="flex">
+                                <h2 class="text-xl font-medium">Price : <span class="px-4 ">{{ $product->price }} Dh</span></h2>
+                            </div>
+                            <div class="flex">
+                                <h2 class="text-xl font-medium">Stock : <span class="px-4 ">{{$product->stock_quantity}}</span></h2>
+                            </div>
+                            <div class="flex">
+                                <h2 class="text-xl font-medium">Category : <a href="#" class="px-4  hover:underline">{{$product->category()->first()->name}}</a></h2>
+                            </div>
+                            <div class="flex">
+                                <h2 class="text-xl font-medium">Discount : <a href="#" class="px-4  hover:underline">{{$product->discount }} %</a></h2>
+                            </div>
+                            <div class="flex flex-col">
+                                <h2 class="text-xl font-medium">Description :</h2>
+                                <p class="text-default tracking-widest">
+                                    {!! $product->description !!}
+                                </p>
+                            </div>
+                       </div>
+                       <form action="{{route('addToCart', ['id' => $product->id] )}}" class="flex flex-col" method="POST">
+                        @csrf
+                        @method('POST')
+                        <div class="flex space-x-6 my-4"> 
+                            <label for="quantity" class="txt-lg font-medium text-white">Quantity :</label>
+                            <input type="number" name="quantity" value="1" min="1" step="1" class="text-black text-lg w-16">
+
                         </div>
-                        <div class="flex">
-                            <h2 class="text-xl font-medium">Stock : <span class="px-4 ">{{$product->stock_quantity}}</span></h2>
-                        </div>
-                        <div class="flex">
-                            <h2 class="text-xl font-medium">Category : <a href="#" class="px-4  hover:underline">{{$product->category()->first()->name}}</a></h2>
-                        </div>
-                        <div class="flex">
-                            <h2 class="text-xl font-medium">Discount : <a href="#" class="px-4  hover:underline">{{$product->discount }} %</a></h2>
-                        </div>
-                        <div class="flex flex-col">
-                            <h2 class="text-xl font-medium">Description :</h2>
-                            <p class="text-default tracking-widest">
-                                {!! $product->description !!}
-                            </p>
-                        </div>
-                        <div class="flex justify-end"> 
-                            <a href="#" class="bg-[#645394] text-white px-4 py-2 border border-white text-center font-medium hover:bg-white hover:text-[#645394]  hover:border-[#645394]">Add to Cart</a>
-                        </div>
+                        <button type="submit" class="bg-[#645394] text-white px-4 py-2 text-center border border-white font-medium hover:bg-white hover:text-[#645394]  hover:border-[#645394]">Add to Cart</button>
+    
+                    </form>
                     </div>
                 </div>
             </div>

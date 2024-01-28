@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\productsController;
 use App\Models\Product;
@@ -46,6 +47,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::put('/category-edit/{id}', [productsController::class, 'updateCategory'])->name('updateCategory');
     Route::delete('/category/delete/{id}', [productsController::class, 'destroyCategory'])->name('destroyCategory');
     
+    // manage orders 
 
 
 
@@ -53,6 +55,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 //testing routes
 Route::get('/test',[PagesController::class , 'test'] );
+Route::post('/order/add-product/{id}', [OrdersController::class, 'addToCart'])->name('addToCart');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -18,11 +18,17 @@ class Product extends Model
         'stock_quantity',
         'category_id'
     ];
+    
     protected $casts = [
         'images' => 'array',
     ];
+
     public function category(){
         return $this->belongsTo(Category::class, 'category_id');
+    }
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)->withPivot('quantity', 'price');
     }
     use HasFactory;
 }
