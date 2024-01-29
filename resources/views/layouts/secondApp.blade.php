@@ -69,13 +69,36 @@
                     @else
                         <a href="/login" class="text-2xl font-medium "> Login </a>
                     @endif
-                    <a href="#" class="text-2xl font-medium "> <i class="fa-solid fa-cart-shopping"></i> </a>
-        
+                    <a href="#" class="text-2xl font-medium " id="cartBtn"> <i class="fa-solid fa-cart-shopping text-[#645394]"></i> </a>
+                        <div class="hidden p-1 py-3 bg-white absolute w-1/5 border my-12 flex-col rounded-md " id="cartMenu">
+                            <div class="flex space-x-3  border-b p-2">
+                                <div class="flex">
+                                    <img src="{{asset("images/1.jpg")}}" alt="logo" class="w-[64px] h-[64px] rounded-xl m-2">
+                                </div>
+                                <div class="flex flex-col sapce-y-2 justify-center">
+                                    <h2 class="text-lg font-medium text-lg">Product name goes here</h2>
+                                    <span class="text-lg text-gray-500">Hoddies</span>
+                                </div>
+                            </div> 
+                            <div class="flex space-x-3  border-b p-2">
+                                <div class="flex">
+                                    <img src="{{asset("images/1.jpg")}}" alt="logo" class="w-[64px] h-[64px] rounded-xl m-2">
+                                </div>
+                                <div class="flex flex-col sapce-y-2 justify-center">
+                                    <h2 class="text-lg font-medium text-lg">Product name goes here</h2>
+                                    <span class="text-lg text-gray-500">Hoddies</span>
+                                </div>
+                            </div> 
+                            <div class="flex my-2 flex-col space-y-2">
+                                <a href="/cart" class="bg-[#645394] text-white rounded-lg text-center px-4 py-2 w-full"> Checkout</a>
+                                <a href="" class="text-gray-400 underline ">Empty Cart</a>
+                            </div>
+                        </div>
                    
                 </div>
             </div>
         </nav>
-        <main class="mt-5 " id="scroll-section">
+        <main class="mt-5" id="scroll-section">
             @yield('content')
         </main>
     </body>
@@ -101,23 +124,26 @@
             fixNavbar();
 
             var moreDropdownBtn = $('#moreDropdownBtn');
-        var moreDropdownContent = $('#moreDropdownContent');
+            var moreDropdownContent = $('#moreDropdownContent');
 
         // Add a click event listener to the More link
-        moreDropdownBtn.click(function (event) {
-            // Prevent the default behavior of the link
-            event.preventDefault();
+            moreDropdownBtn.click(function (event) {
+                // Prevent the default behavior of the link
+                event.preventDefault();
 
-            // Toggle the visibility of the dropdown content
-            moreDropdownContent.toggleClass('hidden');
-        });
+                // Toggle the visibility of the dropdown content
+                moreDropdownContent.toggleClass('hidden');
+            });
+            $(document).click(function (event) {
+                if (!moreDropdownBtn.is(event.target) && !moreDropdownContent.is(event.target) && moreDropdownContent.has(event.target).length === 0) {
+                    moreDropdownContent.addClass('hidden');
+                }
+            });
 
-        // Close the dropdown if the user clicks outside of it
-        $(document).click(function (event) {
-            if (!moreDropdownBtn.is(event.target) && !moreDropdownContent.is(event.target) && moreDropdownContent.has(event.target).length === 0) {
-                moreDropdownContent.addClass('hidden');
-            }
-        });
+            $('#cartBtn').click(function(e){
+                e.preventDefault();
+                $('#cartMenu').toggle();
+            })
         });
     </script>
 </html>

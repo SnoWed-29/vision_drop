@@ -59,32 +59,40 @@ class PagesController extends Controller
       ]);
    }
 
+   public function showCart(){
+
+      $cart = session('cart');
+     
+      $totalAmount = 0;
+      foreach ($cart as &$item) {
+         $productDetails = Product::find($item['product_id']);
+     
+         // Check if the product is found
+         if ($productDetails) {
+            // Make sure 'images' is an array in your Product model
+            $images = json_decode($productDetails->images, true);
+
+            // Merge product details into the original array
+            $item = array_merge($item, [
+                'product_name' => $productDetails->name, // replace 'name' with the actual column name for the product name
+                'product_image' => $images[0], // replace 'image' with the actual column name for the product image
+            ]);
+        }
+        $totalAmount += $item['total_price'];
+     }
+    
+      return view('orders.cart')->with([
+         'cart'=>$cart,
+         'totalAmount'=>$totalAmount
+      ]);
+   }
 
    public function test(){
-
-      $category = Category::create([
-         'name'=>'category03test',
-         'total_products'=>0,
-      ]);
-      return $category;
-      // $product = Product::create([
-      //    'name'=>'Products01Test',
-      //    'slug'=>'Products-01-Test',
-      //    'description'=>'this is the description',
-      //    'price'=>20,
-      //    'discount'=>0,
-      //    'images'=>['https://shorturl.at/eDU38', 'imageLink02'],
-      //    'stock_quantity'=>10,
-      //    'category_id'=>1
-      // ]);
-
-      // if($product){
-      //    return dd('product created', $product);
-      // }else{
-      //    return dd($product, 'product not created');
-      // }
  
-
+  
+      
+      $storedData = session('cart');
+        dd($storedData);
       
    }
 }

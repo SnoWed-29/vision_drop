@@ -54,8 +54,18 @@ Route::group(['middleware' => 'admin'], function () {
 });
 
 //testing routes
-Route::get('/test',[PagesController::class , 'test'] );
+Route::get('/test',[PagesController::class , 'test'] )->name('test');
+
+// add to cart route
 Route::post('/order/add-product/{id}', [OrdersController::class, 'addToCart'])->name('addToCart');
+// cart route 
+Route::get('/cart', [PagesController::class, 'showCart'])->name('cart');
+
+
+
+
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
