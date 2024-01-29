@@ -61,7 +61,7 @@
                             <span class="font-semibold">Total</span>
                             <span class="font-semibold">{{$totalAmount}} Dh</span>
                         </div>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded-lg my-4 w-full">Checkout</button>
+                        <button class="bg-purple-500 text-white py-2 px-4 rounded-lg my-4 w-full">Checkout</button>
                         <a href="#" class="font-semibold underline">Empty The Cart</a>
 
                     </div>

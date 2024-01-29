@@ -34,7 +34,7 @@
                 <p class="w-3/5 text-center font-medium">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus magni quidem quo nobis. Voluptate repellendus necessitatibus esse incidunt fugit optio? Error, consequuntur quo.</p>
             </div>
         </header>
-        <nav class="flex justify-between w-full bg-[#fff] text-[#000] border-b-2 border-b-[#645394] z-10 p-3" id="navbar">
+        <nav class="flex justify-between w-full bg-purple-500 text-[#fff]  border-b-2 border-b-[#645394] z-10 p-3" id="navbar">
             <div class="flex w-10/12 mx-auto justify-between">
                 <div class="flex w-1/3">
                     <a href="/" class="text-xl font-medium bg-black">
@@ -69,9 +69,9 @@
                     @else
                         <a href="/login" class="text-2xl font-medium "> Login </a>
                     @endif
-                    <a href="#" class="text-2xl font-medium " id="cartBtn"> <i class="fa-solid fa-cart-shopping text-[#645394]"></i> </a>
-                        <div class="hidden p-1 py-3 bg-white absolute w-1/5 border my-12 flex-col rounded-md " id="cartMenu">
-                            <div class="flex space-x-3  border-b p-2">
+                    <a href="#" class="text-2xl font-medium " id="cartBtn"> <i class="fa-solid fa-cart-shopping "></i> </a>
+                        <div class="hidden p-1 py-3 bg-white absolute w-1/5 border my-12 flex-col rounded-md divide-y text-black" id="cartMenu">
+                            <div class="flex space-x-3   p-2">
                                 <div class="flex">
                                     <img src="{{asset("images/1.jpg")}}" alt="logo" class="w-[64px] h-[64px] rounded-xl m-2">
                                 </div>

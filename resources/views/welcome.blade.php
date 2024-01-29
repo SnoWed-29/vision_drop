@@ -64,7 +64,7 @@
 </div>
 
 {{-- Nav Section  --}}
-<nav class="flex justify-between w-full bg-[#fff] text-[#000] border-b-2 border-b-[#645394] z-10 p-3" id="navbar">
+<nav class="flex justify-between w-full bg-purple-500 text-[#fff] border-b-2 border-b-[#645394] z-10 p-3" id="navbar">
     <div class="flex w-10/12 mx-auto justify-between">
         <div class="flex w-1/3">
             <a href="/" class="text-xl font-medium bg-black">
@@ -72,10 +72,10 @@
            </a>
         </div>
         <div class="flex w-1/3 justify-around">
-            <a href="/products" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> Hoddies </a>
-            <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> Flags </a>
-            <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> Flashlights </a>
-            <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> More </a>
+            <a href="/products" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> Hoddies </a>
+            <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> Flags </a>
+            <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> Flashlights </a>
+            <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> More </a>
         </div>
         <div class="flex w-1/3 justify-end space-x-4">
             @if(auth()->check())
@@ -99,7 +99,31 @@
             @else
                 <a href="/login" class="text-2xl font-medium "> Login </a>
             @endif
-            <a href="#" class="text-2xl font-medium "> <i class="fa-solid fa-cart-shopping"></i> </a>
+            <a href="#" class="text-2xl font-medium " id="cartBtn"> <i class="fa-solid fa-cart-shopping text-[#fff]"></i> </a>
+                        <div class="hidden p-1 py-3 bg-white absolute w-1/5 border my-12 flex-col rounded-md " id="cartMenu">
+                            <div class="flex space-x-3  border-b p-2">
+                                <div class="flex">
+                                    <img src="{{asset("images/1.jpg")}}" alt="logo" class="w-[64px] h-[64px] rounded-xl m-2">
+                                </div>
+                                <div class="flex flex-col sapce-y-2 justify-center">
+                                    <h2 class="text-lg font-medium text-lg">Product name goes here</h2>
+                                    <span class="text-lg text-gray-500">Hoddies</span>
+                                </div>
+                            </div> 
+                            <div class="flex space-x-3  border-b p-2">
+                                <div class="flex">
+                                    <img src="{{asset("images/1.jpg")}}" alt="logo" class="w-[64px] h-[64px] rounded-xl m-2">
+                                </div>
+                                <div class="flex flex-col sapce-y-2 justify-center">
+                                    <h2 class="text-lg font-medium text-lg">Product name goes here</h2>
+                                    <span class="text-lg text-gray-500">Hoddies</span>
+                                </div>
+                            </div> 
+                            <div class="flex my-2 flex-col space-y-2">
+                                <a href="/cart" class="bg-[#645394] text-white rounded-lg text-center px-4 py-2 w-full"> Checkout</a>
+                                <a href="" class="text-gray-400 underline ">Empty Cart</a>
+                            </div>
+                        </div>
 
            
         </div>
@@ -112,7 +136,7 @@
     </div>
     <div class="flex w-9/12 mx-auto flex-col space-y-4">
         <div class="flex  w-full justify-around">
-            <div class="flex w-72 h-fit flex-col items-center border border-white">
+            <div class="flex w-72 h-fit flex-col items-center ">
                 <div class="flex justify-center">
                     <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
                 </div>
@@ -128,7 +152,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex w-72 h-fit flex-col items-center border border-white">
+            <div class="flex w-72 h-fit flex-col items-center rounded-md">
                 <div class="flex justify-center">
                     <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
                 </div>
@@ -144,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex w-72 h-fit flex-col items-center border border-white">
+            <div class="flex w-72 h-fit flex-col items-center rounded-md">
                 <div class="flex justify-center">
                     <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
                 </div>
@@ -160,7 +184,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex w-72 h-fit flex-col items-center border border-white">
+            <div class="flex w-72 h-fit flex-col items-center rounded-md">
                 <div class="flex justify-center">
                     <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
                 </div>
@@ -299,7 +323,10 @@
             // Toggle the visibility of the dropdown content
             moreDropdownContent.toggleClass('hidden');
         });
-
+        $('#cartBtn').click(function(e){
+                e.preventDefault();
+                $('#cartMenu').toggle();
+            })
         // Close the dropdown if the user clicks outside of it
         $(document).click(function (event) {
             if (!moreDropdownBtn.is(event.target) && !moreDropdownContent.is(event.target) && moreDropdownContent.has(event.target).length === 0) {
