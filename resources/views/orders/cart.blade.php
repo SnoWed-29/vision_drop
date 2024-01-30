@@ -17,7 +17,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ( $cart as $item )
+                                @if ($cart)
+                                @foreach ($cart as $item)
                                     <tr>
                                         <td class="py-4">
                                             <div class="flex items-center">
@@ -28,12 +29,18 @@
                                         <td class="py-4">{{$item['price']}} Dh</td>
                                         <td class="py-4">
                                             <div class="flex items-center">
-                                                <input type="number" name="quantity" id=""  value="{{$item['quantity']}}" class="text-center text-lg w-12 border"> 
+                                                <input type="number" name="quantity" id="" value="{{$item['quantity']}}" class="text-center text-lg w-12 border">
                                             </div>
                                         </td>
                                         <td class="py-4">{{$item['total_price']}} Dh</td>
                                     </tr>
                                 @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="4" class="py-4 text-center">No Product in your cart</td>
+                                </tr>
+                            @endif
+                                
                                 
                                 <!-- More product rows -->
                             </tbody>
@@ -59,7 +66,12 @@
                         <hr class="my-2">
                         <div class="flex justify-between mb-2">
                             <span class="font-semibold">Total</span>
+                            
+                            @if (!$totalAmount)
+                            <span class="font-semibold">0Dh</span>
+                            @else
                             <span class="font-semibold">{{$totalAmount}} Dh</span>
+                            @endif
                         </div>
                         <button class="bg-purple-500 text-white py-2 px-4 rounded-lg my-4 w-full">Checkout</button>
                         <a href="#" class="font-semibold underline">Empty The Cart</a>

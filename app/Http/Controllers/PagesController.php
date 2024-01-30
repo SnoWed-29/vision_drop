@@ -62,7 +62,10 @@ class PagesController extends Controller
    public function showCart(){
 
       $cart = session('cart');
-     
+      
+      $totalAmount = 0;
+     if($cart){
+
       $totalAmount = 0;
       foreach ($cart as &$item) {
          $productDetails = Product::find($item['product_id']);
@@ -80,12 +83,18 @@ class PagesController extends Controller
         }
         $totalAmount += $item['total_price'];
      }
-    
       return view('orders.cart')->with([
          'cart'=>$cart,
          'totalAmount'=>$totalAmount
       ]);
-   }
+     }
+     return view('orders.cart')->with([
+      'cart'=>$cart,
+      'totalAmount'=>$totalAmount
+   ]);
+  }
+      
+   
 
    public function test(){
  

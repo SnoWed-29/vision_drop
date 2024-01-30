@@ -58,6 +58,8 @@ Route::get('/test',[PagesController::class , 'test'] )->name('test');
 
 // add to cart route
 Route::post('/order/add-product/{id}', [OrdersController::class, 'addToCart'])->name('addToCart');
+Route::delete('/empty-cart', [OrdersController::class, 'emptyCart'])->name('empty.cart');
+
 // cart route 
 Route::get('/cart', [PagesController::class, 'showCart'])->name('cart');
 

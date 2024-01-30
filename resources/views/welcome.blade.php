@@ -99,31 +99,31 @@
             @else
                 <a href="/login" class="text-2xl font-medium "> Login </a>
             @endif
-            <a href="#" class="text-2xl font-medium " id="cartBtn"> <i class="fa-solid fa-cart-shopping text-[#fff]"></i> </a>
-                        <div class="hidden p-1 py-3 bg-white absolute w-1/5 border my-12 flex-col rounded-md " id="cartMenu">
-                            <div class="flex space-x-3  border-b p-2">
+            <a href="#" class="text-2xl font-medium " id="cartBtn"> <i class="fa-solid fa-cart-shopping "></i> </a>
+                    <div class="hidden p-1 py-3 bg-white absolute w-1/5 border my-12 flex-col rounded-md divide-y text-black" id="cartMenu">
+                        <div id="cartContainer">
+                            @foreach($productsInCart as $product)
+                            <div class="flex space-x-3 p-2" >
                                 <div class="flex">
-                                    <img src="{{asset("images/1.jpg")}}" alt="logo" class="w-[64px] h-[64px] rounded-xl m-2">
+                                    <img src="{{  asset(Storage::url($product['image'])) }}" alt="product" class="w-[64px] h-[64px] rounded-xl m-2">
                                 </div>
-                                <div class="flex flex-col sapce-y-2 justify-center">
-                                    <h2 class="text-lg font-medium text-lg">Product name goes here</h2>
-                                    <span class="text-lg text-gray-500">Hoddies</span>
+                                <div class="flex flex-col space-y-2 justify-center">
+                                    <h2 class="text-lg font-medium text-lg">{{ $product['name'] }}</h2>
+                                    <span class="text-lg text-gray-500">{{ $product['category']->name }}</span>
                                 </div>
-                            </div> 
-                            <div class="flex space-x-3  border-b p-2">
-                                <div class="flex">
-                                    <img src="{{asset("images/1.jpg")}}" alt="logo" class="w-[64px] h-[64px] rounded-xl m-2">
-                                </div>
-                                <div class="flex flex-col sapce-y-2 justify-center">
-                                    <h2 class="text-lg font-medium text-lg">Product name goes here</h2>
-                                    <span class="text-lg text-gray-500">Hoddies</span>
-                                </div>
-                            </div> 
-                            <div class="flex my-2 flex-col space-y-2">
-                                <a href="/cart" class="bg-[#645394] text-white rounded-lg text-center px-4 py-2 w-full"> Checkout</a>
-                                <a href="" class="text-gray-400 underline ">Empty Cart</a>
                             </div>
+                        @endforeach
+
+                        @if(!$productsInCart)
+                        <p class="py-4 text-center">Cart is empty</p>
+                        @endif
                         </div>
+                        
+                        <div class="flex my-2 flex-col space-y-2">
+                            <a href="/cart" class="bg-[#645394] text-white rounded-lg text-center px-4 py-2 w-full">Checkout</a>
+                            <a href="" id="emptyCart" class="text-gray-400 underline">Empty Cart</a>
+                        </div>
+                    </div>
 
            
         </div>
@@ -303,9 +303,9 @@
 
             $(window).scroll(function () {
                 if ($(window).scrollTop() >= offset) {
-                    navbar.addClass("fixed animate__animated animate__slideInDown shadow-xl text-black border-b-3 border-b-[#645394]");
+                    navbar.addClass("fixed animate__animated animate__slideInDown shadow-xl border-b-3 border-b-[#fff]");
                 } else {
-                    navbar.removeClass("fixed animate__animated animate__slideInDown  shadow-xl text-black border-b-3 border-b-[#645394]");
+                    navbar.removeClass("fixed animate__animated animate__slideInDown  shadow-xl  border-b-3 border-b-[#fff]");
                 }
             });
         }
@@ -334,6 +334,35 @@
             }
         });
     });
+
+
+    document.getElementById('emptyCart').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            // Make an AJAX request to empty the cart
+            fetch('{{ route("empty.cart") }}', {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update the UI or show a success message (optional)
+                    console.log('Cart emptied successfully');
+
+                    // Clear the cart items in the UI
+                    $('#cartContainer').empty();
+
+                    // Optionally, show a message in the UI
+                    $('#cartContainer').append('<p class="py-4 text-center">Cart is empty</p>');
+                }
+            })
+            .catch(error => {
+                console.error('Error emptying the cart', error);
+            });
+        });
 </script>
 <style>
     /* Add this style for the fixed navigation bar */
