@@ -42,10 +42,10 @@
                    </a>
                 </div>
                 <div class="flex w-1/3 justify-around">
-                    <a href="/products" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> Hoddies </a>
-                    <a href="#" class="text-2xl  font-medium hover:border-b-2 border-b-[#645394]"> Flags </a>
-                    <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> Flashlights </a>
-                    <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#645394]"> More </a>
+                    @foreach ($categories as $cat )
+                    <a href="/products/{{$cat->name}}" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> {{$cat->name}} </a>
+                        
+                    @endforeach
                 </div>
                 <div class="flex w-1/3 justify-end space-x-4">
                     @if(auth()->check())

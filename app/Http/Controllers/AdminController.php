@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -11,9 +12,13 @@ class AdminController extends Controller
     public function dashboard(){
         $products = Product::all();
         $totalProducts = count($products);
-        
+        $orders = Order::all();
+        $totalOrders = count($orders);
+
         return view('admin.dashboard')->with([
-            'totalProuducts'=> $totalProducts
+            'totalProuducts'=> $totalProducts,
+            'totalOrders'=>$totalOrders,
+            'orders'=>$orders
         ]);
     }
     public function manageProducts(){

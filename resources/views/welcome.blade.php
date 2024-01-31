@@ -71,11 +71,11 @@
                 <img src="{{asset("images/LOGO VISION.png")}}" alt="logo" class="w-[40px]">
            </a>
         </div>
-        <div class="flex w-1/3 justify-around">
-            <a href="/products" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> Hoddies </a>
-            <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> Flags </a>
-            <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> Flashlights </a>
-            <a href="#" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> More </a>
+        <div class="flex space-x-3 ">
+            @foreach ($categories as $cat )
+            <a href="/products/{{$cat->name}}" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> {{$cat->name}} </a>
+                
+            @endforeach
         </div>
         <div class="flex w-1/3 justify-end space-x-4">
             @if(auth()->check())
@@ -136,70 +136,26 @@
     </div>
     <div class="flex w-9/12 mx-auto flex-col space-y-4">
         <div class="flex  w-full justify-around">
+            @foreach ($productsCat1 as $prod )
             <div class="flex w-72 h-fit flex-col items-center ">
+
                 <div class="flex justify-center">
                     <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
                 </div>
                 <div class="flex flex-col space-y-2 items-center bg-[#28213B] w-full justify-center p-2">
                     <div class="flex">
-                        <h1 class="text-2xl">Lorem, ipsum dolor.</h1>
+                        <h1 class="text-2xl">{{$prod->name}}</h1>
                     </div>
                     <div class="flex">
-                        <h4 class="text-xl"><span>30</span> Dh</h4>
+                        <h4 class="text-xl"><span>{{$prod->price}}</span> Dh</h4>
                     </div>
                     <div class="flex">
-                        <a href="#" class="bg-white text-[#645394] border border-[#645394] tex-lg px-4 font-medium py-2 hover:text-white hover:bg-[#645394] transition" >Buy</a>
+                        <a href="/product/{{$prod->slug}}" class="bg-white text-[#645394] border border-[#645394] tex-lg px-4 font-medium py-2 hover:text-white hover:bg-[#645394] transition" >Buy</a>
                     </div>
                 </div>
             </div>
-            <div class="flex w-72 h-fit flex-col items-center rounded-md">
-                <div class="flex justify-center">
-                    <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
-                </div>
-                <div class="flex flex-col space-y-2 items-center bg-[#28213B] w-full justify-center p-2">
-                    <div class="flex">
-                        <h1 class="text-2xl">Lorem, ipsum dolor.</h1>
-                    </div>
-                    <div class="flex">
-                        <h4 class="text-xl"><span>30</span> Dh</h4>
-                    </div>
-                    <div class="flex">
-                        <a href="#" class="bg-white text-[#645394] border border-[#645394] tex-lg px-4 font-medium py-2 hover:text-white hover:bg-[#645394] transition" >Buy</a>
-                    </div>
-                </div>
-            </div>
-            <div class="flex w-72 h-fit flex-col items-center rounded-md">
-                <div class="flex justify-center">
-                    <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
-                </div>
-                <div class="flex flex-col space-y-2 items-center bg-[#28213B] w-full justify-center p-2">
-                    <div class="flex">
-                        <h1 class="text-2xl">Lorem, ipsum dolor.</h1>
-                    </div>
-                    <div class="flex">
-                        <h4 class="text-xl"><span>30</span> Dh</h4>
-                    </div>
-                    <div class="flex">
-                        <a href="#" class="bg-white text-[#645394] border border-[#645394] tex-lg px-4 font-medium py-2 hover:text-white hover:bg-[#645394] transition" >Buy</a>
-                    </div>
-                </div>
-            </div>
-            <div class="flex w-72 h-fit flex-col items-center rounded-md">
-                <div class="flex justify-center">
-                    <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
-                </div>
-                <div class="flex flex-col space-y-2 items-center bg-[#28213B] w-full justify-center p-2">
-                    <div class="flex">
-                        <h1 class="text-2xl">Lorem, ipsum dolor.</h1>
-                    </div>
-                    <div class="flex">
-                        <h4 class="text-xl"><span>30</span> Dh</h4>
-                    </div>
-                    <div class="flex">
-                        <a href="#" class="bg-white text-[#645394] border border-[#645394] tex-lg px-4 font-medium py-2 hover:text-white hover:bg-[#645394] transition" >Buy</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+            
         </div> 
     </div>
     {{-- latest hoddies --}}
@@ -208,71 +164,25 @@
     </div>
     <div class="flex w-9/12 mx-auto flex-col space-y-4">
         <div class="flex  w-full justify-around">
+            @foreach ($productsCat1 as $prod )
             <div class="flex w-72 h-fit flex-col items-center border border-white">
                 <div class="flex justify-center">
                     <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
                 </div>
                 <div class="flex flex-col space-y-2 items-center bg-[#28213B] w-full justify-center p-2">
                     <div class="flex">
-                        <h1 class="text-2xl">Lorem, ipsum dolor.</h1>
+                        <h1 class="text-2xl">{{$prod->name}}</h1>
                     </div>
                     <div class="flex">
-                        <h4 class="text-xl"><span>30</span> Dh</h4>
+                        <h4 class="text-xl"><span>{{$prod->price}}</span> Dh</h4>
                     </div>
                     <div class="flex">
-                        <a href="#" class="bg-white text-[#645394] border border-[#645394] tex-lg px-4 font-medium py-2 hover:text-white hover:bg-[#645394] transition" >Buy</a>
+                        <a href="/product/{{$prod->slug}}" class="bg-white text-[#645394] border border-[#645394] tex-lg px-4 font-medium py-2 hover:text-white hover:bg-[#645394] transition" >Buy</a>
                     </div>
                 </div>
             </div>
-            <div class="flex w-72 h-fit flex-col items-center border border-white">
-                <div class="flex justify-center">
-                    <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
-                </div>
-                <div class="flex flex-col space-y-2 items-center bg-[#28213B] w-full justify-center p-2">
-                    <div class="flex">
-                        <h1 class="text-2xl">Lorem, ipsum dolor.</h1>
-                    </div>
-                    <div class="flex">
-                        <h4 class="text-xl"><span>30</span> Dh</h4>
-                    </div>
-                    <div class="flex">
-                        <a href="#" class="bg-white text-[#645394] border border-[#645394] tex-lg px-4 font-medium py-2 hover:text-white hover:bg-[#645394] transition" >Buy</a>
-                    </div>
-                </div>
-            </div>
-            <div class="flex w-72 h-fit flex-col items-center border border-white">
-                <div class="flex justify-center">
-                    <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
-                </div>
-                <div class="flex flex-col space-y-2 items-center bg-[#28213B] w-full justify-center p-2">
-                    <div class="flex">
-                        <h1 class="text-2xl">Lorem, ipsum dolor.</h1>
-                    </div>
-                    <div class="flex">
-                        <h4 class="text-xl"><span>30</span> Dh</h4>
-                    </div>
-                    <div class="flex">
-                        <a href="#" class="bg-white text-[#645394] border border-[#645394] tex-lg px-4 font-medium py-2 hover:text-white hover:bg-[#645394] transition" >Buy</a>
-                    </div>
-                </div>
-            </div>
-            <div class="flex w-72 h-fit flex-col items-center border border-white">
-                <div class="flex justify-center">
-                    <img src="{{asset('images/5.jpg')}}" class="w-full h-72"> 
-                </div>
-                <div class="flex flex-col space-y-2 items-center bg-[#28213B] w-full justify-center p-2">
-                    <div class="flex">
-                        <h1 class="text-2xl">Lorem, ipsum dolor.</h1>
-                    </div>
-                    <div class="flex">
-                        <h4 class="text-xl"><span>30</span> Dh</h4>
-                    </div>
-                    <div class="flex">
-                        <a href="#" class="bg-white text-[#645394] border border-[#645394] tex-lg px-4 font-medium py-2 hover:text-white hover:bg-[#645394] transition" >Buy</a>
-                    </div>
-                </div>
-            </div>
-        </div> 
+            @endforeach
+            
     </div>
 </section>
 

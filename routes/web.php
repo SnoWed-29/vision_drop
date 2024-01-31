@@ -22,7 +22,7 @@ use App\Models\Product;
 Route::get('/', [PagesController::class, 'index'])->name('indexPage');
 
 // products related routes 
-Route::get('/products', [PagesController::class, 'products']);
+Route::get('/products/{name}', [PagesController::class, 'products']);
 Route::get('/product/{slug}' , [PagesController::class, 'showProduct']);
 
 
@@ -59,6 +59,9 @@ Route::get('/test',[PagesController::class , 'test'] )->name('test');
 // add to cart route
 Route::post('/order/add-product/{id}', [OrdersController::class, 'addToCart'])->name('addToCart');
 Route::delete('/empty-cart', [OrdersController::class, 'emptyCart'])->name('empty.cart');
+
+Route::post('/createOrder', [OrdersController::class, 'createOrder'])->name('createOrder');
+Route::get('/checkout', [OrdersController::class, 'checkout'])->name('checkout');
 
 // cart route 
 Route::get('/cart', [PagesController::class, 'showCart'])->name('cart');

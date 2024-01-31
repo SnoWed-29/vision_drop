@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\ServiceProvider;
 
@@ -45,8 +46,11 @@ class CartServiceProvider extends ServiceProvider
                     $productsInCart[] = $productDetails;
                 }
             }
-
-            $view->with('productsInCart', $productsInCart);
+            $categories = Category::where('name', '<>', 'Uncategorized')->get();
+            $view->with([
+                'productsInCart' => $productsInCart,
+                'categories'=>$categories
+            ]);
         });
     }
 

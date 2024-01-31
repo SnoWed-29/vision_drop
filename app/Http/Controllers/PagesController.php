@@ -11,11 +11,28 @@ use SebastianBergmann\CodeCoverage\Report\Xml\Totals;
 class PagesController extends Controller
 {
    public function index() {
-    return view('welcome');
+
+   $productsCat1 = Product::where('category_id', 4)->inRandomOrder()->take(4)->get();
+   $productsCat2 = Product::where('category_id', 5)->inRandomOrder()->take(4)->get();
+    return view('welcome')->with([
+      'productsCat1'=>$productsCat1,
+      'productsCat2'=>$productsCat2
+    ]);
    }
-   public function products(){
-    return view('products.index');
-   }
+
+   public function products($name){
+      $category = Category::where('name', $name)->first();
+      if(!$category){
+          return abort(404);
+      }
+      $products = $category->products;
+
+      return view('products.index')->with([
+         'products'=> $products,
+         'cat'=>$category
+         ]
+      );
+  }
 
    public function showProduct($slug){
 

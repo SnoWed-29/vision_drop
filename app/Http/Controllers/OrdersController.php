@@ -46,8 +46,7 @@ class OrdersController extends Controller
         session(['cart' => $cart]);
         return redirect()->route('cart');
     }
-
-        public function emptyCart(Request $request){
+    public function emptyCart(Request $request){
             try {
                 $request->session()->forget('cart');
                 return response()->json(['success' => true]);
@@ -55,9 +54,16 @@ class OrdersController extends Controller
                 return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
             }
     }
-        public function createOrder(Request $request){
+    public function createOrder(Request $request){
             // Assuming you have the necessary form data in the request
-    
+            $request->validate([
+                'name'=> 'required',
+                'last_name'=> 'required',
+                'address'=> 'required',
+                'city'=> 'required',
+                'phone_number'=> 'required',
+                'email'=> 'required'
+            ]);
             $order = Order::create([
                 'name' => $request->input('name'),
                 'last_name' => $request->input('last_name'),
@@ -84,6 +90,14 @@ class OrdersController extends Controller
     
             // Clear the cart session
             session()->forget('cart');
+
+            return view('orders.checkout')->with([
+                'order'=> $order
+            ]);
     
-        }
+    }
+    public function checkout(){
+
+        return view('orders.checkout');
+    }
 }
