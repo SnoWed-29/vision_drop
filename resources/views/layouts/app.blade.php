@@ -27,7 +27,7 @@
                     <img src="{{asset("images/LOGO VISION.png")}}" alt="logo" class="w-[50px] md:w-[70px] lg:w-[80px]">
                 </div>
             </div>
-            <div class="flex w-full justify-center my-4">
+            <div class="flex w-full justify-center my-2 md:my-4">
                 <h3 class="text-xl ">Lorem ipsum dolor sit amet, consectetur adipisicing.</h3>
             </div>
             <div class="flex w-full justify-center my-1">

@@ -108,16 +108,29 @@ class productsController extends Controller
     }
     
     public function destroyProduct (Request $request, $id){
-        $product = Product::find($id);
+        // Find the product by ID
+    $product = Product::find($id);
 
-        if (!$product) {
-            abort(404);
+    // Check if the product exists
+    if (!$product) {
+        return redirect()->route('admin.manageProduct')->with('error', 'Product not found');
+    }
+
+    // Delete the images associated with the product
+    $images = json_decode($product->images, true);
+
+    foreach ($images as $imagePath) {
+        $fullImagePath = storage_path('app/public/' . $imagePath);
+
+        // Check if the file exists before attempting to delete
+        if (file_exists($fullImagePath)) {
+            unlink($fullImagePath);
         }
-    
-        // Delete the associated images (optional, depends on your application logic)
-        // You may want to add logic to delete the images from storage as well.
-    
-        $product->delete();
+    }
+
+    // Delete the product from the database
+    $product->delete();
+
         return redirect()->route('admin.manageProduct');
     }
     public function addCategory(Request $request){

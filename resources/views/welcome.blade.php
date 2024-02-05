@@ -5,7 +5,7 @@
 <div class="flex w-full md:w-10/12 mx-auto my-2 py-4">
     <div class="owl-carousel owl-theme ">
 
-        <div class="item relative hover-trigger flex items-end h-[50vh] hover:-translate-y-1 hover:scale-125 transition duration-300 ease-in-out delay-150"> 
+        <div class="item relative hover-trigger flex items-end h-[60vh] lg:h-[50vh] hover:-translate-y-1 hover:scale-125 transition duration-300 ease-in-out delay-150"> 
             <img src="{{asset('images/1.jpg')}}" class="h-full absolute inset-0"> 
 
             <div class="content-div absolute inset-0 flex flex-col h-full items-center justify-center space-y-3 p-6 bg-[#6453944d] hidden">
@@ -16,7 +16,7 @@
                 <a href="#" class="bg-[#645394] px-4 py-2 rounded-sm">View More</a>
             </div>
         </div>
-        <div class="item relative hover-trigger flex items-end h-[50vh] hover:-translate-y-1 hover:scale-125 transition duration-300 ease-in-out delay-150"> 
+        <div class="item relative hover-trigger flex items-end h-[60vh] lg:h-[50vh] hover:-translate-y-1 hover:scale-125 transition duration-300 ease-in-out delay-150"> 
             <img src="{{asset('images/7.jpg')}}" class="h-full absolute inset-0"> 
 
             <div class="content-div absolute inset-0 flex flex-col h-full items-center justify-center space-y-3 p-6 bg-[#6453944d] hidden">
@@ -27,7 +27,7 @@
                 <a href="#" class="bg-[#645394] px-4 py-2 rounded-sm">View More</a>
             </div>
         </div>
-        <div class="item relative hover-trigger flex items-end h-[50vh] hover:-translate-y-1 hover:scale-125 transition duration-300 ease-in-out delay-150"> 
+        <div class="item relative hover-trigger flex items-end h-[60vh] lg:h-[50vh] hover:-translate-y-1 hover:scale-125 transition duration-300 ease-in-out delay-150"> 
             <img src="{{asset('images/2.jpg')}}" class="h-full absolute inset-0"> 
 
             <div class="content-div absolute inset-0 flex flex-col h-full items-center justify-center space-y-3 p-6 bg-[#6453944d] hidden">
@@ -38,7 +38,7 @@
                 <a href="#" class="bg-[#645394] px-4 py-2 rounded-sm">View More</a>
             </div>
         </div>
-        <div class="item relative hover-trigger flex items-end h-[50vh] hover:-translate-y-1 hover:scale-125 transition duration-300 ease-in-out delay-150"> 
+        <div class="item relative hover-trigger flex items-end h-[60vh] lg:h-[50vh] hover:-translate-y-1 hover:scale-125 transition duration-300 ease-in-out delay-150"> 
             <img src="{{asset('images/4.jpg')}}" class="h-full absolute inset-0"> 
 
             <div class="content-div absolute inset-0 flex flex-col h-full items-center justify-center space-y-3 p-6 bg-[#6453944d] hidden">
@@ -49,7 +49,7 @@
                 <a href="#" class="bg-[#645394] px-4 py-2 rounded-sm">View More</a>
             </div>
         </div>
-        <div class="item relative hover-trigger flex items-end h-[50vh] hover:-translate-y-1 hover:scale-125 transition duration-300 ease-in-out delay-150"> 
+        <div class="item relative hover-trigger flex items-end h-[60vh] lg:h-[50vh] hover:-translate-y-1 hover:scale-125 transition duration-300 ease-in-out delay-150"> 
             <img src="{{asset('images/5.jpg')}}" class="h-full absolute inset-0"> 
 
             <div class="content-div absolute inset-0 flex flex-col h-full items-center justify-center space-y-3 p-6 bg-[#6453944d] hidden">
@@ -64,8 +64,9 @@
 </div>
 
 {{-- Nav Section  --}}
-<nav class="flex justify-between w-full bg-purple-500 text-[#fff] border-b-2 border-b-[#645394] z-10 p-3" id="navbar">
-    <div class="flex w-10/12 mx-auto justify-between">
+
+<nav class="flex justify-between w-full bg-purple-500 text-[#fff] border-b-2 border-b-[#645394] z-10 lg:p-3" id="navbar">
+    <div class="hidden w-10/12 mx-auto justify-between lg:flex">
         <div class="flex w-1/3">
             <a href="/" class="text-xl font-medium bg-black">
                 <img src="{{asset("images/LOGO VISION.png")}}" alt="logo" class="w-[40px]">
@@ -73,7 +74,7 @@
         </div>
         <div class="flex space-x-3 ">
             @foreach ($categories as $cat )
-            <a href="/products/{{$cat->name}}" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> {{$cat->name}} </a>
+            <a href="/products/{{$cat->name}}" class="text-2xl  font-medium hover:border-b-2 border-b-[#fff]"> {{$cat->name}} </a>
                 
             @endforeach
         </div>
@@ -128,7 +129,28 @@
            
         </div>
     </div>
+    <div class="flex w-full mx-auto justify-between lg:hidden">
+        <div class="flex">
+            <a href="#navbar" class="font-medium text-4xl px-2" id="navBtn"><i class="fa-solid fa-bars"></i></a>
+        </div>        
+        <div class="flex">
+
+            <a href="/" class="text-xl font-medium bg-black">
+                <img src="{{asset("images/LOGO VISION.png")}}" alt="logo" class="w-[45px]">
+           </a>
+        </div>
+        <a href="#" class="text-4xl font-medium px-2" > <i class="fa-solid fa-cart-shopping "></i> </a>
+
+    </div>
+    <div class="hidden  absolute h-screen my-12 w-full bg-purple-500 " id="navMenu">
+        <div class="flex flex-col space-y-4">
+            @foreach ($categories as $cat )
+                <a href="/products/{{$cat->name}}" class="text-2xl p-2 border-b  font-medium border-b-[#fff]"> {{$cat->name}} </a> 
+            @endforeach
+        </div>
+    </div>
 </nav>
+
 {{-- products Section --}}
 <section class="w-10-12 mx-auto my-2"  id="scroll-section">
     <div class="flex w-full justify-center mb-12">
@@ -192,14 +214,25 @@
 <script>
     $(document).ready(function () {
         var owl = $('.owl-carousel');
-        owl.owlCarousel({
-            items: 4,
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            autoplayTimeout: 3500,
-            autoplayHoverPause: true
-        });
+owl.owlCarousel({
+    items: 4,
+    loop: true,
+    margin: 10,
+    autoplay: true,
+    autoplayTimeout: 3500,
+    autoplayHoverPause: true,
+    responsive: {
+        0: {
+            items: 1
+        },
+        600: {
+            items: 1
+        },
+        1000: {
+            items: 3
+        }
+    }
+});
 
         $('.hover-trigger').hover(function () {
             $(this).find('.content-div').toggleClass('hidden');
@@ -236,6 +269,12 @@
         $('#cartBtn').click(function(e){
                 e.preventDefault();
                 $('#cartMenu').toggle();
+            })
+
+
+            $('#navBtn').click(function(e){
+                e.preventDefault();
+                $('#navMenu').toggle();
             })
         // Close the dropdown if the user clicks outside of it
         $(document).click(function (event) {

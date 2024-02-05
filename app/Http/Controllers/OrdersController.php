@@ -96,6 +96,18 @@ class OrdersController extends Controller
             ]);
     
     }
+    public function confirmeOrder($id){
+        $order = Order::find($id);
+
+        if (!$order) {
+            abort(404);
+        }
+        $order->update([
+            'is_confirmed'=>true,
+        ]);
+        return dd('wp');
+    }
+
     public function checkout(){
 
         return view('orders.checkout');

@@ -34,16 +34,16 @@
                 <p class="w-3/5 text-center font-medium">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus magni quidem quo nobis. Voluptate repellendus necessitatibus esse incidunt fugit optio? Error, consequuntur quo.</p>
             </div>
         </header>
-        <nav class="flex justify-between w-full bg-purple-500 text-[#fff]  border-b-2 border-b-[#645394] z-10 p-3" id="navbar">
-            <div class="flex w-10/12 mx-auto justify-between">
+        <nav class="flex justify-between w-full bg-purple-500 text-[#fff] border-b-2 border-b-[#645394] z-10 lg:p-3" id="navbar">
+            <div class="hidden w-10/12 mx-auto justify-between lg:flex">
                 <div class="flex w-1/3">
                     <a href="/" class="text-xl font-medium bg-black">
                         <img src="{{asset("images/LOGO VISION.png")}}" alt="logo" class="w-[40px]">
                    </a>
                 </div>
-                <div class="flex w-1/3 justify-around">
+                <div class="flex space-x-3 ">
                     @foreach ($categories as $cat )
-                    <a href="/products/{{$cat->name}}" class="text-2xl font-medium hover:border-b-2 border-b-[#fff]"> {{$cat->name}} </a>
+                    <a href="/products/{{$cat->name}}" class="text-2xl  font-medium hover:border-b-2 border-b-[#fff]"> {{$cat->name}} </a>
                         
                     @endforeach
                 </div>
@@ -70,31 +70,52 @@
                         <a href="/login" class="text-2xl font-medium "> Login </a>
                     @endif
                     <a href="#" class="text-2xl font-medium " id="cartBtn"> <i class="fa-solid fa-cart-shopping "></i> </a>
-                    <div class="hidden p-1 py-3 bg-white absolute w-1/5 border my-12 flex-col rounded-md divide-y text-black" id="cartMenu">
-                        <div id="cartContainer">
-                            @foreach($productsInCart as $product)
-                            <div class="flex space-x-3 p-2" >
-                                <div class="flex">
-                                    <img src="{{  asset(Storage::url($product['image'])) }}" alt="product" class="w-[64px] h-[64px] rounded-xl m-2">
+                            <div class="hidden p-1 py-3 bg-white absolute w-1/5 border my-12 flex-col rounded-md divide-y text-black" id="cartMenu">
+                                <div id="cartContainer">
+                                    @foreach($productsInCart as $product)
+                                    <div class="flex space-x-3 p-2" >
+                                        <div class="flex">
+                                            <img src="{{  asset(Storage::url($product['image'])) }}" alt="product" class="w-[64px] h-[64px] rounded-xl m-2">
+                                        </div>
+                                        <div class="flex flex-col space-y-2 justify-center">
+                                            <h2 class="text-lg font-medium text-lg">{{ $product['name'] }}</h2>
+                                            <span class="text-lg text-gray-500">{{ $product['category']->name }}</span>
+                                        </div>
+                                    </div>
+                                @endforeach
+        
+                                @if(!$productsInCart)
+                                <p class="py-4 text-center">Cart is empty</p>
+                                @endif
                                 </div>
-                                <div class="flex flex-col space-y-2 justify-center">
-                                    <h2 class="text-lg font-medium text-lg">{{ $product['name'] }}</h2>
-                                    <span class="text-lg text-gray-500">{{ $product['category']->name }}</span>
+                                
+                                <div class="flex my-2 flex-col space-y-2">
+                                    <a href="/cart" class="bg-[#645394] text-white rounded-lg text-center px-4 py-2 w-full">Checkout</a>
+                                    <a href="" id="emptyCart" class="text-gray-400 underline">Empty Cart</a>
                                 </div>
                             </div>
-                        @endforeach
-
-                        @if(!$productsInCart)
-                        <p class="py-4 text-center">Cart is empty</p>
-                        @endif
-                        </div>
-                        
-                        <div class="flex my-2 flex-col space-y-2">
-                            <a href="/cart" class="bg-[#645394] text-white rounded-lg text-center px-4 py-2 w-full">Checkout</a>
-                            <a href="" id="emptyCart" class="text-gray-400 underline">Empty Cart</a>
-                        </div>
-                    </div>
+        
                    
+                </div>
+            </div>
+            <div class="flex w-full mx-auto justify-between lg:hidden">
+                <div class="flex">
+                    <a href="#navbar" class="font-medium text-4xl px-2" id="navBtn"><i class="fa-solid fa-bars"></i></a>
+                </div>        
+                <div class="flex">
+        
+                    <a href="/" class="text-xl font-medium bg-black">
+                        <img src="{{asset("images/LOGO VISION.png")}}" alt="logo" class="w-[45px]">
+                   </a>
+                </div>
+                <a href="#" class="text-4xl font-medium px-2" > <i class="fa-solid fa-cart-shopping "></i> </a>
+        
+            </div>
+            <div class="hidden  absolute h-screen my-12 w-full bg-purple-500 " id="navMenu">
+                <div class="flex flex-col space-y-4">
+                    @foreach ($categories as $cat )
+                        <a href="/products/{{$cat->name}}" class="text-2xl p-2 border-b  font-medium border-b-[#fff]"> {{$cat->name}} </a> 
+                    @endforeach
                 </div>
             </div>
         </nav>

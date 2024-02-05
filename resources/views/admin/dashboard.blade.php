@@ -59,7 +59,14 @@
                             <td>{{Illuminate\Support\Str::limit($order->address, 20)}}</td>
                             <td>{{$order->created_at}}</td>
                             <td>{{$order->total_amount}}</td>
-                            <td>action here</td>
+                            @if ($order->is_confirmed == true)
+                                <td>Order is confirmed</td>  
+                            @else
+                                <td>
+                                    <a href="{{route('confirmOrder', ['id'=>$order->id])}}" class="px-4 py-2 text-white bg-purple-400 my-1">Confirme Order</a>
+                                </td>  
+                            @endif
+
                         </tr>
                         @endforeach
                         

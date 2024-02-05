@@ -46,9 +46,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/category/edit/{id}', [PagesController::class, 'updateCategoryView']);
     Route::put('/category-edit/{id}', [productsController::class, 'updateCategory'])->name('updateCategory');
     Route::delete('/category/delete/{id}', [productsController::class, 'destroyCategory'])->name('destroyCategory');
-    
     // manage orders 
-
+    Route::get('/confirme-order/{id}', [OrdersController::class, 'confirmeOrder'])->name('confirmOrder');
 
 
 });

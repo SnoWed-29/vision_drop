@@ -15,7 +15,8 @@ class Order extends Model
         'city',
         'phone_number',
         'email',
-        'total_amount'
+        'total_amount',
+        'is_confirmed'
         
     ];
     public function products()
